@@ -26,6 +26,7 @@ const DUMMY = [
 
 
 const HomePage = () => {
+    // 사전에 렌더링 페이지가 페칭을 기다려야 하는 데이터를 다룰때 솔루션이 따로존재
     return (
         <MeetupList meetups={DUMMY}/>
     );
