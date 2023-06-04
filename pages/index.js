@@ -1,4 +1,3 @@
-import React from 'react';
 import MeetupList from './../components/meetups/MeetupList';
 
 const DUMMY = [
@@ -25,11 +24,40 @@ const DUMMY = [
 
 
 
-const HomePage = () => {
+const HomePage = (props) => {
     // 사전에 렌더링 페이지가 페칭을 기다려야 하는 데이터를 다룰때 솔루션이 따로존재
     return (
-        <MeetupList meetups={DUMMY}/>
+        <MeetupList meetups={props.meetups}/>
     );
 };
 
+
+//데이터가 매순간 바뀌지 않는다면 req에 대한 액세스 즉 인증에 대한 액세스가 없다면 getStaticProps사용해라!
+
+//(1)
+// export async function getStaticProps(){
+//     //각종 data API 사용가능
+//     //객체 반환
+//     //이름은 꼭 props
+//     return {
+//         props: {
+//             meetups: DUMMY
+//         },
+//         //배포후에도 페이지가 주기에 따라 업데이트 되도록 설정
+//         revalidate: 1
+//     }
+//   }
+
+//(2)
+export async function getServerSideProps(context){
+    const req= context.req;
+    const res= context.res;
+    
+    //각종 data API 사용가능
+        return {
+        props: {
+            meetups: DUMMY
+        },
+    }
+}
 export default HomePage;
